@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function computerPlay() {
+            let random = Math.floor(Math.random() * 3) + 1;
+            switch (random) {
+                case 1:
+                return "paper";
+                break;
+                case 2:
+                return "rock";
+                break;
+                case 3:
+                return "scissors";
+                break;
+
+            }
+        }
+
+
+
+        let computerPoints = 0;
+        let playerPoints = 0;
+        let playerSelection;
+        let computerSelection;
+
+
+        function playRound(playerSelection, computerSelection) {
+
+            computerSelection = computerPlay();
+            playerSelection = prompt("choose between rock paper scissors", "");
+            playerSelection = playerSelection.toLowerCase();
+
+
+            if (playerSelection === computerSelection) 
+            {
+                alert("e' un pareggio!");
+
+            } else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "scissors" && computerSelection === "rock" || playerSelection === "paper" && computerSelection === "scissors")
+                {
+                    alert(`You lose! ${computerSelection}   beat ${playerSelection}!`);
+                    computerPoints++;
+                    count++;
+                }
+              else if (playerSelection === "scissors" && computerSelection === "paper" || playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "paper" && computerSelection === "rock")
+                {
+                    alert(`You win! ${playerSelection} beat ${computerSelection}!`);
+                    playerPoints++;
+                    count++;
+
+                }  
+              else     
+                {
+                    alert("You choose something else");
+                }
+
+        }
+
+        let count = 0;
+        function game(a) {
+            while (count < a) {
+                playRound(playerSelection, computerSelection);
+                console.log(count);
+                console.log(playerPoints);
+                console.log(computerPoints);
+            } 
+
+        }    
+        game(3);
+        let vincitore = playerPoints > computerPoints ? 
+        `hai vinto con ${playerPoints} contro ${computerPoints}`: `hai perso con punteggio ${playerPoints} 
+        contro il punteggio ${computerPoints}`;
+        alert(vincitore);
+
+
+    </script>
+</body>
+</html>
