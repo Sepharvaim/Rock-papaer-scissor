@@ -7,6 +7,16 @@
     <title>Document</title>
 </head>
 <body>
+
+
+    <h3>Fai la tua scelta!</h3>
+
+    <button id='1'>Rock</button>
+    <button id='2'>Paper</button>
+    <button id='3'>Scissors</button>
+
+
+
     <script>
         
         function computerPlay() {
@@ -25,19 +35,27 @@
             }
         }
 
-
-
         let computerPoints = 0;
         let playerPoints = 0;
-        let playerSelection;
+        let playerSelection = 1;
         let computerSelection;
+        let count = 0;
+        const buttoN = document.querySelectorAll('button');
+
+        buttoN.forEach(button => button.addEventListener('click', function() {
+            playerSelection = button.innerText;
+            console.log(playerSelection);
+            playRound();
 
 
+        }))
+               
+      
         function playRound(playerSelection, computerSelection) {
 
             computerSelection = computerPlay();
-            playerSelection = prompt("choose between rock paper scissors", "");
-            playerSelection = playerSelection.toLowerCase();
+            
+            
 
 
             if (playerSelection === computerSelection) 
@@ -64,8 +82,10 @@
 
         }
 
-        let count = 0;
-        function game(a) {
+
+
+
+        function startGameChoseRound(a) {
             while (count < a) {
                 playRound(playerSelection, computerSelection);
                 console.log(count);
@@ -74,11 +94,16 @@
             } 
 
         }    
-        game(3);
-        let vincitore = playerPoints > computerPoints ? 
+
+        function sceltaDelVincitore() {
+            let vincitore = playerPoints > computerPoints ? 
         `hai vinto con ${playerPoints} contro ${computerPoints}`: `hai perso con punteggio ${playerPoints} 
         contro il punteggio ${computerPoints}`;
         alert(vincitore);
+        }
+
+        // startGameChoseRound(3);
+        // sceltaDelVincitore();
 
 
     </script>
