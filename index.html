@@ -7,6 +7,17 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        body {
+            margin: 15px auto;
+            width: 500px;
+            height: 550px;
+            border: 1px solid red;
+            text-align: center;
+            border-radius: 25px;
+        }
+    </style>
+
 
 
     <h3>Fai la tua scelta!</h3>
@@ -36,74 +47,98 @@
         }
 
         let computerPoints = 0;
-        let playerPoints = 0;
-        let playerSelection = 1;
+        var playerPoints = 0;
+        var playerSelection;
         let computerSelection;
         let count = 0;
-        const buttoN = document.querySelectorAll('button');
+
+
+       let containerDiv = document.createElement('div');
+       let userScore = document.createElement('p');
+       let compScore = document.createElement('p');
+       let bodyElement = document.querySelector("body");
+       let pareggioVintoPerso = document.createElement('p');
+       let vincente = document.createElement('p');
+    //    let persoRound = document.createElement('p');
+       containerDiv.appendChild(userScore);
+       containerDiv.appendChild(compScore);
+       bodyElement.appendChild(containerDiv);
+       containerDiv.appendChild(pareggioVintoPerso);
+       containerDiv.appendChild(vincente);
+       pareggioVintoPerso.setAttribute('style','font-size: 30px; background-color: yellow; margin: 20px');
+       vincente.setAttribute('style','font-size: 40px; background-color: orange; margin: 10px');
+
+
+        const buttoN = document.querySelectorAll('button');        
 
         buttoN.forEach(button => button.addEventListener('click', function() {
             playerSelection = button.innerText;
-            console.log(playerSelection);
-            playRound();
+            playerSelection = playerSelection.toLowerCase();      
+            playRound(playerSelection,computerSelection);
+            vincente.textContent = '';
 
 
-        }))
-               
-      
+            if (count >= 5) {
+                sceltaDelVincitore();
+                compScore.textContent = "Punteggio computer: " + 0;
+                userScore.textContent = "Punteggio Giocatore: " + 0;
+                computerPoints = 0;
+                playerPoints = 0;
+                count = 0;
+                
+                
+            } 
+
+        }));
+             
+        
         function playRound(playerSelection, computerSelection) {
-
-            computerSelection = computerPlay();
+             computerSelection = computerPlay();
             
-            
-
-
             if (playerSelection === computerSelection) 
             {
-                alert("e' un pareggio!");
+                
+                pareggioVintoPerso.textContent = 'Avete pareggiato!';
 
             } else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "scissors" && computerSelection === "rock" || playerSelection === "paper" && computerSelection === "scissors")
                 {
-                    alert(`You lose! ${computerSelection}   beat ${playerSelection}!`);
-                    computerPoints++;
+                    
+                    pareggioVintoPerso.textContent = `You lose! ${computerSelection}   beat ${playerSelection}!`;
                     count++;
+                    computerPoints++;
+                    compScore.textContent = "Punteggio computer: " + computerPoints;
                 }
               else if (playerSelection === "scissors" && computerSelection === "paper" || playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "paper" && computerSelection === "rock")
                 {
-                    alert(`You win! ${playerSelection} beat ${computerSelection}!`);
-                    playerPoints++;
+                    
+                    pareggioVintoPerso.textContent = `You win! ${playerSelection} beat ${computerSelection}!`;
                     count++;
-
+                    playerPoints++;
+                    userScore.textContent = "Punteggio Giocatore: " + playerPoints;
+                    
                 }  
               else     
                 {
                     alert("You choose something else");
                 }
-
         }
 
 
+        
 
-
-        function startGameChoseRound(a) {
-            while (count < a) {
-                playRound(playerSelection, computerSelection);
-                console.log(count);
-                console.log(playerPoints);
-                console.log(computerPoints);
-            } 
-
-        }    
+          
 
         function sceltaDelVincitore() {
             let vincitore = playerPoints > computerPoints ? 
-        `hai vinto con ${playerPoints} contro ${computerPoints}`: `hai perso con punteggio ${playerPoints} 
-        contro il punteggio ${computerPoints}`;
-        alert(vincitore);
+         vincente.textContent = `Hai vinto con ${playerPoints} punti contro ${computerPoints} punti`:
+         vincente.textContent = `hai perso con un punteggio di ${playerPoints} 
+        contro il punteggio del computer di ${computerPoints}`;
+        
+        
         }
 
-        // startGameChoseRound(3);
-        // sceltaDelVincitore();
+        
+       
 
 
     </script>
